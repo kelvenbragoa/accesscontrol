@@ -1,14 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Roles') }}
+            {{ __('Niveis') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-                {{-- <div class="bg-green mb-4 px-5 py-4 w-full border-l-4 border-green">
+
+            {{-- <div class="bg-green mb-4 px-5 py-4 w-full border-l-4 border-green">
                     <div class="flex justify-between">
                         <div class="flex space-x-3">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -21,62 +21,69 @@
                         </div>
                     </div>
                 </div> --}}
-                
+            <x-success-alert class="mb-4" :messagesuccess="session('messagesuccess')" />
+
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <a href="{{ route('roles.create') }}"
-                       class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                        Create
+                        class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
+                        Criar <i class="fas fa-plus"></i>
                     </a>
+
                     <div class="min-w-full align-middle">
                         <table class="min-w-full divide-y divide-gray-200 border">
                             <thead>
-                            <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nome</span>
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Criado em</span>
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <span class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Acoes</span>
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th class="px-6 py-3 bg-gray-50 text-left">
+                                        <span
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Nome</span>
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left">
+                                        <span
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Criado
+                                            em</span>
+                                    </th>
+                                    <th class="px-6 py-3 bg-gray-50 text-left">
+                                        <span
+                                            class="text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Acoes</span>
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                            @foreach($roles as $role)
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        {{ $role->name }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        {{ $role->created_at->format('Y-m-d H:i') }}
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        {{ $role->created_at->format('Y-m-d H:i') }}
-                                    </td>
-                                    
-                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
-                                        <a href="{{ url('/roles/'.$role->id.'/rolepermission') }}"
-                                        class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-black px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                                            Adicionar/Editar Permissoes
-                                        </a>
-                                        <a href="{{ route('roles.edit',$role) }}"
-                                        class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-black px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                                            Editar
-                                        </a>
-                                        <a href="{{ route('roles.show',$role) }}"
-                                        class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-black px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                                            Ver
-                                        </a>
-                                        <a href="{{ route('roles.create') }}"
-                                        class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-black px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                                            Excluir
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach ($roles as $item)
+                                    <tr class="bg-white">
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                            {{ $item->name }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                            {{ $item->created_at->format('Y-m-d H:i') }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                            {{ $item->created_at->format('Y-m-d H:i') }}
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                                            <a href="{{ url('/roles/' . $item->id . '/rolepermission') }}">
+                                                <i class="fas fa-list"></i>
+                                            </a>
+
+                                            <a href="{{ route('roles.edit', $item) }}">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('roles.show', $item) }}">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
+                                            <a href="{{ route('roles.create') }}" x-data=""
+                                                x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion{{$item->id}}')">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @include('roles.partials.modal-delete')
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

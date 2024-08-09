@@ -26,7 +26,7 @@
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <a href="{{ route('users.index') }}"
                         class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                        Voltar
+                        <i class="fas fa-arrow-left"></i>Voltar
                     </a>
                     <form action="{{ route('users.store') }}" method="POST">
                         @csrf
@@ -45,12 +45,12 @@
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
-                        <div>
+                        {{-- <div>
                             <x-input-label for="role" value="Role" />
                             <x-text-input id="role" name="roles[]" value="{{ old('email') }}" type="text"
                                 class="block mt-1 w-full" required />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                        </div>
+                        </div> --}}
 
                         <!-- Password -->
                         <div>
@@ -72,14 +72,14 @@
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
 
-                        <div class="grid grid-cols-4 gap-4">
+                        {{-- <div class="grid grid-cols-4 gap-4">
                             @foreach ($roles as $role)
                                 <div class="col">
                                     <x-input-label for="name" value="{{ $role->name }}" />
                                     <input type="checkbox" name="role[]" value="{{ $role->name }}">
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
 
                         <div class="mt-4">
                             <x-primary-button>

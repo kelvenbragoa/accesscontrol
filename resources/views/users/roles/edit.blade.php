@@ -12,7 +12,7 @@
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <a href="{{ url('/users/' .$user->id ) }}"
                         class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                        Voltar
+                        <i class="fas fa-arrow-left"></i>Voltar
                     </a>
                     <p><strong>Usuarios</strong>: {{ $user->name }}</p>
                     <p><strong>Email</strong>: {{ $user->email }}</p>
@@ -24,7 +24,7 @@
                             @foreach ($roles as $role)
                                 <div class="col">
                                     <x-input-label for="name" value="{{ $role->name }}" />
-                                    <input type="checkbox" name="role[]" value="{{ $role->name }}" {{ in_array($role->id, $rolesuser) ? 'checked' : '' }}>
+                                    <input type="checkbox" name="role[]" value="{{ $role->name }}" {{ in_array($role->id, $rolesuser) ? 'checked' : '' }} class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
                             @endforeach
                         </div>

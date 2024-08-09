@@ -26,38 +26,33 @@
                 <div class="overflow-hidden overflow-x-auto p-6 bg-white border-b border-gray-200">
                     <a href="{{ route('users.index') }}"
                         class="mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                        Voltar
+                        <i class="fas fa-arrow-left"></i>Voltar
                     </a>
                     <p><strong>Usuarios</strong>: {{ $user->name }}</p>
                     <p><strong>Email</strong>: {{ $user->email }}</p>
 
                     <a href="{{ url('users/'.$user->id.'/roles') }}"
                         class="mt-4 mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                        Adicionar/Editar Roles
+                        Adicionar/Editar Roles<i class="fas fa-plus"></i>
                     </a>
                     <p><strong>Roles</strong>:
-                        @if (!empty($user->getRoleNames()))
-                            @foreach ($user->getRoleNames() as $role)
-                                <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">{{ $role }}</span>
-
-                            @endforeach
-                        @else
-                            <small>-</small>
-                        @endif
+                        @forelse ($user->getRoleNames() as $role)
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{$role}}</span>
+                        @empty
+                            Nehuma permissao!
+                        @endforelse
                     </p>
 
                     <a href="{{ url('users/'.$user->id.'/permissions') }}"
                         class="mt-4 mb-4 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-gray-700 shadow-sm transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25">
-                        Adicionar/Editar Permissions
+                        Adicionar/Editar Permissoes<i class="fas fa-plus"></i>
                     </a>
-                    <p><strong>Permissions</strong>:
-                        @if (!empty($user->getDirectPermissions()))
-                            @foreach ($user->getDirectPermissions() as $permission)
-                            <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">{{ $permission->name }}</span>
-                            @endforeach
-                        @else
-                            <small>-</small>
-                        @endif
+                    <p><strong>Permissoes</strong>:
+                        @forelse ($user->getDirectPermissions() as $permission)
+                            <span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{$permission->name}}</span>
+                        @empty
+                            Nehuma permissao!
+                        @endforelse
                     </p>
 
                 </div>

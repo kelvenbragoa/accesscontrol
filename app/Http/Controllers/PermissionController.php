@@ -41,7 +41,7 @@ class PermissionController extends Controller
         $data = $request->all();
         Permission::create($data);
 
-        return to_route('permissions.index');
+        return to_route('permissions.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
     /**
@@ -51,7 +51,9 @@ class PermissionController extends Controller
     {
         //
         $permission = Permission::findOrFail($id);
-        return view('permissions.show', compact('permission'));
+        $roles = $permission->roles();
+        $users = $permission->users();
+        return view('permissions.show', compact('permission','roles','users'));
     }
 
     /**
@@ -74,7 +76,7 @@ class PermissionController extends Controller
         $permission = Permission::findOrFail($id);
         $permission->update($data);
 
-        return to_route('permissions.index');
+        return to_route('permissions.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
     /**
@@ -84,8 +86,8 @@ class PermissionController extends Controller
     {
         //
         $permission = Permission::findOrFail($id);
-        $permission->destroy();
-        return to_route('permissions.index');
+        $permission->delete();
+        return to_route('permissions.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
 

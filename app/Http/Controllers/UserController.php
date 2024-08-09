@@ -55,10 +55,10 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->syncRoles($request->role);
+        // $user->syncRoles($request->role);
 
 
-        return to_route('users.index');
+        return to_route('users.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
     /**
@@ -109,9 +109,9 @@ class UserController extends Controller
             'password' => $data['password'] ? $data['password'] : Hash::make($request->password),
         ]);
 
-        $user->syncRoles($request->role);
+        // $user->syncRoles($request->role);
 
-        return to_route('users.index');
+        return to_route('users.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
     /**
@@ -121,7 +121,7 @@ class UserController extends Controller
     {
         //
         $users = User::findOrFail($id);
-        $users->destroy();
+        $users->delete();
         return to_route('users.index');
     }
 }

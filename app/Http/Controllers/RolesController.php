@@ -39,20 +39,28 @@ class RolesController extends Controller
     public function store(Request $request): RedirectResponse
     {
         //
+        $request->validate([
+            'name' => ['required','string','max:255','unique:roles,name'],
+        ]);
         $data = $request->all();
         Role::create($data);
 
-        return to_route('roles.index');
+        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');
+
+       
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id): View
+    public function show(string $id) : View
     {
         //
         $role = Role::findOrFail($id);
-        return view('roles.show', compact('role'));
+        $rolepermissions = $role->permissions()->get();
+        $userroles = DB::table('model_has_roles')->where('role_id',$role->id)->get();
+        
+        return view('roles.show', compact('role','rolepermissions','userroles'));
     }
 
     /**
@@ -75,7 +83,7 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update($data);
 
-        return to_route('roles.index');
+        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
     /**
@@ -85,8 +93,8 @@ class RolesController extends Controller
     {
         //
         $role = Role::findOrFail($id);
-        $role->destroy();
-        return to_route('roles.index');
+        $role->delete();
+        return to_route('roles.index')->with('messagesuccess','Registro apagado com sucesso');;
     }
 
     public function addRolePermission(string $id) : View
@@ -108,7 +116,7 @@ class RolesController extends Controller
 
         $role->syncPermissions($data['permission']);
 
-        return to_route('roles.index');
+        return to_route('roles.index')->with('messagesuccess','Registro criado com sucesso');;
     }
 
     public function addRoleToUser(string $id) : View
